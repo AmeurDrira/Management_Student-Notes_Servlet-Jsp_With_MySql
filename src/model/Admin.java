@@ -20,8 +20,24 @@ public class Admin implements Serializable {
 
 	private String password;
 
+	public Admin(int id, String login, String password) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.password = password;
+	}
+
+
 	public Admin() {
 	}
+	
+
+	public Admin(String login, String password) {
+		super();
+		this.login = login;
+		this.password = password;
+	}
+
 
 	public int getId() {
 		return this.id;

@@ -21,6 +21,7 @@ public class NiveauImpl implements NiveauInterface {
 
 	@Override
 	public void insertNiveau(Niveau niveau) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(niveau);
@@ -31,6 +32,7 @@ public class NiveauImpl implements NiveauInterface {
 
 	@Override
 	public void updateNiveau(Niveau niveau) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(niveau);
@@ -42,9 +44,10 @@ public class NiveauImpl implements NiveauInterface {
 
 	@Override
 	public void deleteNiveau(Niveau niveau) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(niveau);
+		entitymanager.remove(entitymanager.merge(niveau));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -53,6 +56,7 @@ public class NiveauImpl implements NiveauInterface {
 
 	@Override
 	public Niveau findByIdNiveau(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Niveau niveau = entitymanager.find(Niveau.class, id);
@@ -62,8 +66,10 @@ public class NiveauImpl implements NiveauInterface {
 		return niveau;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Niveau> getAllNiveau() {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		List<Niveau> list;
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();

@@ -38,6 +38,24 @@ public class Groupe implements Serializable {
 
 	public Groupe() {
 	}
+	
+
+	public Groupe(int id, String abreviation, int code, String libelle, Niveau niveau) {
+		super();
+		this.id = id;
+		this.abreviation = abreviation;
+		this.code = code;
+		this.libelle = libelle;
+		this.niveau = niveau;
+	}
+	public Groupe(String abreviation, int code, String libelle, Niveau niveau) {
+		super();
+		
+		this.abreviation = abreviation;
+		this.code = code;
+		this.libelle = libelle;
+		this.niveau = niveau;
+	}
 
 	public int getId() {
 		return this.id;

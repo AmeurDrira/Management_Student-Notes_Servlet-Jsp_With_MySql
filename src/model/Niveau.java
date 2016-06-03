@@ -29,6 +29,24 @@ public class Niveau implements Serializable {
 
 	public Niveau() {
 	}
+	
+
+	public Niveau(int id, int code, String libelle) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.libelle = libelle;
+			
+	}
+
+	public Niveau( int code, String libelle) {
+		super();
+		
+		this.code = code;
+		this.libelle = libelle;
+			
+	}
+
 
 	public int getId() {
 		return this.id;

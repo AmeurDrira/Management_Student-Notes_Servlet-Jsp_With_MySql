@@ -21,6 +21,7 @@ public class GroupeImpl implements GroupeInterface {
 
 	@Override
 	public void insertGroupe(Groupe groupe) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(groupe);
@@ -31,6 +32,7 @@ public class GroupeImpl implements GroupeInterface {
 
 	@Override
 	public void updateGroupe(Groupe groupe) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(groupe);
@@ -42,9 +44,10 @@ public class GroupeImpl implements GroupeInterface {
 
 	@Override
 	public void deleteGroupe(Groupe groupe) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(groupe);
+		entitymanager.remove(entitymanager.merge(groupe));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -53,6 +56,7 @@ public class GroupeImpl implements GroupeInterface {
 
 	@Override
 	public Groupe findByIdGroupe(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Groupe groupe = entitymanager.find(Groupe.class, id);
@@ -63,8 +67,10 @@ public class GroupeImpl implements GroupeInterface {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Groupe> getAllGroupe() {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		List<Groupe> list;
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();

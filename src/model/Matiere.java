@@ -37,6 +37,36 @@ public class Matiere implements Serializable {
 
 	public Matiere() {
 	}
+	
+
+	public Matiere(int id, int code, float coefficient, int credit, String libelle, float volumec, float volumetd,
+			float volumetp) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.coefficient = coefficient;
+		this.credit = credit;
+		this.libelle = libelle;
+		this.volumec = volumec;
+		this.volumetd = volumetd;
+		this.volumetp = volumetp;
+		
+	}
+	public Matiere(int code, float coefficient, int credit, String libelle, float volumec, float volumetd,
+			float volumetp) {
+		super();
+		
+		this.code = code;
+		this.coefficient = coefficient;
+		this.credit = credit;
+		this.libelle = libelle;
+		this.volumec = volumec;
+		this.volumetd = volumetd;
+		this.volumetp = volumetp;
+		
+	}
+	
+
 
 	public int getId() {
 		return this.id;

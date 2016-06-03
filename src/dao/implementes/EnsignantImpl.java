@@ -22,7 +22,7 @@ public class EnsignantImpl implements EnsignantInterface {
 
 	@Override
 	public void insertEnsignant(Ensignant ensignant) {
-
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(ensignant);
@@ -34,6 +34,7 @@ public class EnsignantImpl implements EnsignantInterface {
 
 	@Override
 	public void updateEnsignant(Ensignant ensignant) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(ensignant);
@@ -45,9 +46,10 @@ public class EnsignantImpl implements EnsignantInterface {
 
 	@Override
 	public void deleteEnsignant(Ensignant ensignant) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(ensignant);
+		entitymanager.remove(entitymanager.merge(ensignant));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -56,6 +58,7 @@ public class EnsignantImpl implements EnsignantInterface {
 
 	@Override
 	public Ensignant findByIdEnsignant(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Ensignant ensignant = entitymanager.find(Ensignant.class, id);
@@ -66,8 +69,10 @@ public class EnsignantImpl implements EnsignantInterface {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Ensignant> getAllEnsignant() {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		List<Ensignant> list;
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
@@ -78,5 +83,6 @@ public class EnsignantImpl implements EnsignantInterface {
 		emfactory.close();
 		return list;
 	}
+	
 
 }

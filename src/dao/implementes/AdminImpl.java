@@ -22,7 +22,7 @@ public class AdminImpl implements AdminInterface {
 
 	@Override
 	public void insertAdmin(Admin admin) {
-
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(admin);
@@ -33,7 +33,7 @@ public class AdminImpl implements AdminInterface {
 
 	@Override
 	public void updateAdmin(Admin admin) {
-
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(admin);
@@ -45,10 +45,11 @@ public class AdminImpl implements AdminInterface {
 
 	@Override
 	public void deleteAdmin(Admin admin) {
-
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(admin);
+	
+		entitymanager.remove(entitymanager.merge(admin));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -57,7 +58,7 @@ public class AdminImpl implements AdminInterface {
 
 	@Override
 	public Admin findByIdAdmin(int id) {
-
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Admin admin = entitymanager.find(Admin.class, id);
@@ -67,9 +68,11 @@ public class AdminImpl implements AdminInterface {
 		return admin;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Admin> getAllAdmin() {
 		List<Admin> list;
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Query query = entitymanager.createQuery("SELECT a from Admin a");

@@ -13,7 +13,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/Applications/jasperserver-6.2.0-1/apache-tomcat/lib/mysql-connector-java-5.1.37-bin.jar">
+	<classpathentry kind="lib" path="/Users/ameur/WorkSpaceEclipseEjb/apache-tomcat-8.0.32/lib/mysql-connector-java-5.1.37-bin.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/ameur/WorkSpaceEclipseEjb/Jars/jstl-1.2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

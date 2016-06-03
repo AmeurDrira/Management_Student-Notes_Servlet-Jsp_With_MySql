@@ -39,6 +39,34 @@ public class Ensignant implements Serializable {
 
 	public Ensignant() {
 	}
+	
+
+	public Ensignant(int id, int cin, Date dateNaissance, String login, String nom, String password, String prenom,
+			int tel) {
+		super();
+		this.id = id;
+		this.cin = cin;
+		this.dateNaissance = dateNaissance;
+		this.login = login;
+		this.nom = nom;
+		this.password = password;
+		this.prenom = prenom;
+		this.tel = tel;
+		
+	}
+	
+	public Ensignant(int cin, Date dateNaissance, String login, String nom, String password, String prenom,
+			int tel) {
+		super();
+		this.cin = cin;
+		this.dateNaissance = dateNaissance;
+		this.login = login;
+		this.nom = nom;
+		this.password = password;
+		this.prenom = prenom;
+		this.tel = tel;
+		
+	}
 
 	public int getId() {
 		return this.id;

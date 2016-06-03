@@ -21,6 +21,7 @@ public class MatiereImpl implements MatiereInterface {
 
 	@Override
 	public void insertMatiere(Matiere matiere) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(matiere);
@@ -32,6 +33,7 @@ public class MatiereImpl implements MatiereInterface {
 
 	@Override
 	public void updateMatiere(Matiere matiere) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(matiere);
@@ -43,9 +45,10 @@ public class MatiereImpl implements MatiereInterface {
 
 	@Override
 	public void deleteMatiere(Matiere matiere) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(matiere);
+		entitymanager.remove(entitymanager.merge(matiere));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -54,6 +57,7 @@ public class MatiereImpl implements MatiereInterface {
 
 	@Override
 	public Matiere findByIdMatiere(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Matiere matiere = entitymanager.find(Matiere.class, id);
@@ -63,8 +67,10 @@ public class MatiereImpl implements MatiereInterface {
 		return matiere;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Matiere> getAllMatiere() {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		List<Matiere> list;
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
