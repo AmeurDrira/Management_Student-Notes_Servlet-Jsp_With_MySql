@@ -1,10 +1,6 @@
 package controler;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.implementes.EnsignantImpl;
 import dao.implementes.GroupeImpl;
 import dao.implementes.NiveauImpl;
-import model.Ensignant;
 import model.Groupe;
 import model.Niveau;
 
@@ -27,6 +21,7 @@ import model.Niveau;
 @WebServlet("/GroupeServlet")
 public class GroupeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Groupe e;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -43,7 +38,7 @@ public class GroupeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GroupeImpl groupeImpl = new GroupeImpl();
-		NiveauImpl niveauImpl =new NiveauImpl();
+		NiveauImpl niveauImpl = new NiveauImpl();
 		String action = request.getParameter("action");
 
 		if ("delete".equals(action)) {
@@ -53,17 +48,29 @@ public class GroupeServlet extends HttpServlet {
 		}
 		if ("update".equals(action)) {
 			String id = request.getParameter("id");
-			Groupe e = groupeImpl.findByIdGroupe(Integer.parseInt(id));
+			e = groupeImpl.findByIdGroupe(Integer.parseInt(id));
 			request.setAttribute("obj", e);
 
 		}
-		
+
 		List<Groupe> liste = groupeImpl.getAllGroupe();
+
 		request.setAttribute("liste", liste);
-		
+
 		List<Niveau> listeNiveau = niveauImpl.getAllNiveau();
+
+		if (null != e) {
+			for (int i = 0; i < listeNiveau.size(); i++) {
+				if (listeNiveau.get(i).getId() == e.getId()) {
+					Niveau tmpNiveau = listeNiveau.get(0);
+					listeNiveau.set(0, listeNiveau.get(i));
+					listeNiveau.set(i, tmpNiveau);
+
+				}
+			}
+		}
 		request.setAttribute("listeNiveau", listeNiveau);
-		
+
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/groupeView.jsp");
 		rd.forward(request, response);
 
@@ -76,22 +83,21 @@ public class GroupeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GroupeImpl groupeImpl = new GroupeImpl();
-		NiveauImpl niveauImpl =new NiveauImpl();	
-		
+		NiveauImpl niveauImpl = new NiveauImpl();
+
 		String libelle = request.getParameter("libelle");
 		String abreviation = request.getParameter("abreviation");
-		String code = request.getParameter("code");	
+		String code = request.getParameter("code");
 		String idniveau = request.getParameter("niveaugroupe");
-		Niveau niveau=niveauImpl.findByIdNiveau(Integer.parseInt(idniveau));
+		Niveau niveau = niveauImpl.findByIdNiveau(Integer.parseInt(idniveau));
 		String id = request.getParameter("id");
-		
-		
-		if (null == id && !"".equals(libelle) && !"".equals(abreviation) && !"".equals(code) ) {
-			Groupe g=new Groupe(abreviation,Integer.parseInt(code),libelle,niveau);
+
+		if ("".equals(id) && !"".equals(libelle) && !"".equals(abreviation) && !"".equals(code)) {
+			Groupe g = new Groupe(abreviation, Integer.parseInt(code), libelle, niveau);
 			groupeImpl.insertGroupe(g);
 
 		} else {
-			Groupe g=new Groupe(Integer.parseInt(id),abreviation,Integer.parseInt(code),libelle,niveau);
+			Groupe g = new Groupe(Integer.parseInt(id), abreviation, Integer.parseInt(code), libelle, niveau);
 			groupeImpl.updateGroupe(g);
 		}
 

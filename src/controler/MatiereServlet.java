@@ -74,7 +74,7 @@ public class MatiereServlet extends HttpServlet {
 		String credit = request.getParameter("credit");
 		String id = request.getParameter("id");
 
-		if (null == id && !"".equals(libelle) && !"".equals(coefficient) && !"".equals(code) && !"".equals(volumec)
+		if ("".equals(id)  && !"".equals(libelle) && !"".equals(coefficient) && !"".equals(code) && !"".equals(volumec)
 				&& !"".equals(volumetp) && !"".equals(volumetd) && !"".equals(credit)) {
 			Matiere m = new Matiere(Integer.parseInt(code), Float.parseFloat(coefficient), Integer.parseInt(credit),
 					libelle, Float.parseFloat(volumec), Float.parseFloat(volumetd), Float.parseFloat(volumetp));

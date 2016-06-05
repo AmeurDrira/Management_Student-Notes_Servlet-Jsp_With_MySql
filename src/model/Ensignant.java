@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +35,9 @@ public class Ensignant implements Serializable {
 	private String prenom;
 
 	private int tel;
+	
+	@Transient
+	private String sdateNaissance; 
 
 	//bi-directional many-to-one association to Matiereensignier
 	@OneToMany(mappedBy="ensignant")
@@ -85,7 +91,16 @@ public class Ensignant implements Serializable {
 	}
 
 	public Date getDateNaissance() {
-		return this.dateNaissance;
+		SimpleDateFormat spd = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		try {
+			String stringDate = spd.format(this.dateNaissance);
+			 date = spd.parse(stringDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
 	}
 
 	public void setDateNaissance(Date dateNaissance) {
@@ -131,6 +146,20 @@ public class Ensignant implements Serializable {
 	public void setTel(int tel) {
 		this.tel = tel;
 	}
+
+	public String getSdateNaissance() {
+		SimpleDateFormat spd = new SimpleDateFormat("yyyy-MM-dd");
+
+
+			String stringDate = spd.format(this.dateNaissance);
+		return stringDate;
+	}
+
+
+	public void setSdateNaissance(String sdateNaissance) {
+		this.sdateNaissance = sdateNaissance;
+	}
+
 
 	public List<Matiereensignier> getMatiereensigniers() {
 		return this.matiereensigniers;

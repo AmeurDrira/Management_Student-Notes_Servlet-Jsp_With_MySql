@@ -4,7 +4,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@include file="header.html"%>
+<script type="text/javascript">
 
+</script>
 
 <div class="col-md-12">
 
@@ -64,69 +66,10 @@
 	</div>
 	<!-- /.box -->
 </div>
-<div class="col-md-12">
-	<!-- Horizontal Form -->
-	<div class="box box-info">
-		<div class="box-header with-border">
-			<h3 class="box-title">Ajouter Groupe</h3>
-		</div>
-		<!-- /.box-header -->
-		<!-- form start -->
-		<form class="form-horizontal" action="GroupeServlet" method="post">
-			<div class="box-body">
-			
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Libelle</label>
 
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="libelle">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Abreviation</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="abreviation">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Code</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="code">
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-                  
-                  <label for="inputEmail3" class="col-sm-2 control-label">Niveau</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="niveaugroupe">
-                 		 <c:forEach items="${requestScope.listeNiveau}" var="listeNiveau">          
-                  						
-						<option value='<c:out value="${listeNiveau.id}"></c:out>' ><c:out value="${listeNiveau.libelle}"></c:out></option>	
-					</c:forEach>									
-                   </select>
-                  
-                  </div>
-                </div>				
-
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-				<button type="reset" class="btn btn-default">Cancel</button>
-				<button type="submit" class="btn btn-info pull-right">Ajouter</button>
-			</div>
-			<!-- /.box-footer -->
-		</form>
-	</div>
 	<!-- /.box -->
 	<!-- general form elements disabled -->
-</div>
+
 <div class="col-md-12">
 	<!-- Horizontal Form -->
 	<div class="box box-info">
@@ -147,7 +90,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="libelle" value="${requestScope.obj.libelle }">
+							 name="libelle" value="${requestScope.obj.libelle }" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -155,7 +98,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="abreviation" value="${requestScope.obj.abreviation }">
+							 name="abreviation" value="${requestScope.obj.abreviation }" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -163,7 +106,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="code" value="${requestScope.obj.code }">
+							 name="code" value="${requestScope.obj.code }" required> 
 					</div>
 				</div>
 				

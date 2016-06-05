@@ -45,7 +45,6 @@ public class AdminServlet extends HttpServlet {
 		}
 		if ("update".equals(action)) {
 			String id = request.getParameter("id");
-			System.out.println(id);
 			Admin a = adminImpl.findByIdAdmin(Integer.parseInt(id));
 			request.setAttribute("obj", a);
 
@@ -69,7 +68,7 @@ public class AdminServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		String id = request.getParameter("id");
 
-		if (null == id && !"".equals(login) && !"".equals(pwd)) {
+		if ( "".equals(id)&& !"".equals(login) && !"".equals(pwd)) {
 			Admin admin = new Admin(login, pwd);
 			AdminImpl adminImp = new AdminImpl();
 			adminImp.insertAdmin(admin);

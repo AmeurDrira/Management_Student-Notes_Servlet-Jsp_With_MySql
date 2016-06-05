@@ -69,7 +69,7 @@ public class NiveauServlet extends HttpServlet {
 		String code = request.getParameter("code");
 		String id = request.getParameter("id");
 
-		if (null == id && !"".equals(libelle) && !"".equals(code)) {
+		if ("".equals(id)  && !"".equals(libelle) && !"".equals(code)) {
 			Niveau n = new Niveau(Integer.parseInt(code), libelle);
 			niveauImpl.insertNiveau(n);
 

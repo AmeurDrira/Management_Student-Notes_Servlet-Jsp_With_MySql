@@ -333,6 +333,6 @@
     if ($('body').hasClass('sidebar-collapse')) {
       $("[data-layout='sidebar-collapse']").attr('checked', 'checked');
     }
-
+    
   }
 })(jQuery, $.AdminLTE);

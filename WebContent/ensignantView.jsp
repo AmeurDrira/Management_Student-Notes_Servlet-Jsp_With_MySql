@@ -40,14 +40,14 @@
 							<td><%=i++%></td>
 							<td><c:out value="${liste.nom}"></c:out></td>
 							<td><c:out value="${liste.prenom}"></c:out></td>
-							<td><c:out value="${liste.dateNaissance}"></c:out></td>
+							<td><c:out value="${liste.sdateNaissance}"></c:out></td>
 							<td><c:out value="${liste.cin}"></c:out></td>
 							<td><c:out value="${liste.tel}"></c:out></td>
 							<td><c:out value="${liste.login}"></c:out></td>
 							<td><c:out value="${liste.password}"></c:out></td>
 
 							<td><a href=EnsignantServlet?action=update&id=<c:out value="${liste.id}"></c:out>>
-									<button type="button" class="btn btn-default" >
+									<button type="button" class="btn btn-default scrollbutton" >
 
 										<span class="glyphicon glyphicon-edit"></span>
 									</button>
@@ -69,92 +69,10 @@
 	</div>
 	<!-- /.box -->
 </div>
-<div class="col-md-12">
-	<!-- Horizontal Form -->
-	<div class="box box-info">
-		<div class="box-header with-border">
-			<h3 class="box-title">Ajouter Ensignant</h3>
-		</div>
-		<!-- /.box-header -->
-		<!-- form start -->
-		<form class="form-horizontal" action="EnsignantServlet" method="post">
-			<div class="box-body">
-			
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Nom</label>
 
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="nom">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Prenom</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="prenom">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Date de Naissance</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							placeholder="AAAA-MM-JJ" name="dateNaissance">
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Telephone</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="tel">
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">carte d'identite</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="cin">
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Login</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="login">
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">Mot de passe</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputPassword3"
-							 name="pwd">
-					</div>
-				</div>
-
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-				<button type="reset" class="btn btn-default">Cancel</button>
-				<button type="submit" class="btn btn-info pull-right">Ajouter</button>
-			</div>
-			<!-- /.box-footer -->
-		</form>
-	</div>
 	<!-- /.box -->
 	<!-- general form elements disabled -->
-</div>
+
 <div class="col-md-12">
 	<!-- Horizontal Form -->
 	<div class="box box-info">
@@ -175,7 +93,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="nom" value='<c:out value="${requestScope.obj.nom }"></c:out>'>
+							 name="nom" value='<c:out value="${requestScope.obj.nom }"></c:out>' required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -183,7 +101,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="prenom" value='<c:out value="${requestScope.obj.prenom }"></c:out>'>
+							 name="prenom" value='<c:out value="${requestScope.obj.prenom }"></c:out>' required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -191,7 +109,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							placeholder="AAAA-MM-JJ" name="dateNaissance"value='<c:out value="${requestScope.obj.dateNaissance }"></c:out>'>
+							placeholder="AAAA-MM-JJ" name="dateNaissance"value='<c:out value="${requestScope.obj.sdateNaissance }"></c:out>' required>
 					</div>
 				</div>
 				
@@ -201,7 +119,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="tel" value='<c:out value="${requestScope.obj.tel }"></c:out>'>
+							 name="tel" value='<c:out value="${requestScope.obj.tel }"></c:out>' required>
 					</div>
 				</div>
 				
@@ -210,7 +128,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="cin" value='<c:out value="${requestScope.obj.cin }"></c:out>'>
+							 name="cin" value='<c:out value="${requestScope.obj.cin }"></c:out>' required>
 					</div>
 				</div>
 				
@@ -219,7 +137,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="login"value='<c:out value="${requestScope.obj.login }"></c:out>'>
+							 name="login"value='<c:out value="${requestScope.obj.login }"></c:out>' required>
 					</div>
 				</div>
 				
@@ -229,7 +147,7 @@
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputPassword3"
-							 name="pwd" value='<c:out value="${requestScope.obj.password }"></c:out>'>
+							 name="pwd" value='<c:out value="${requestScope.obj.password }"></c:out>' required>
 					</div>
 				</div>
 

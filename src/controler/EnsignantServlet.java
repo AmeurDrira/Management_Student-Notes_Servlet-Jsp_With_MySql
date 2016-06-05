@@ -90,7 +90,7 @@ public class EnsignantServlet extends HttpServlet {
 			}
 		}
 
-		if (null == id && !"".equals(login) && !"".equals(pwd) && !"".equals(nom) && !"".equals(prenom)
+		if ("".equals(id) && !"".equals(login) && !"".equals(pwd) && !"".equals(nom) && !"".equals(prenom)
 				&& !"".equals(cin)) {
 			Ensignant e = new Ensignant(Integer.parseInt(cin), myDate, login, nom, pwd, prenom, Integer.parseInt(tel));
 
