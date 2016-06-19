@@ -40,19 +40,19 @@ public class Groupe implements Serializable {
 	}
 	
 
-	public Groupe(int id, String abreviation, int code, String libelle, Niveau niveau) {
+	public Groupe(int id, String abreviation, String libelle, Niveau niveau) {
 		super();
 		this.id = id;
 		this.abreviation = abreviation;
-		this.code = code;
+		code=0;
 		this.libelle = libelle;
 		this.niveau = niveau;
 	}
-	public Groupe(String abreviation, int code, String libelle, Niveau niveau) {
+	public Groupe(String abreviation,String libelle, Niveau niveau) {
 		super();
 		
 		this.abreviation = abreviation;
-		this.code = code;
+		code=0;
 		this.libelle = libelle;
 		this.niveau = niveau;
 	}

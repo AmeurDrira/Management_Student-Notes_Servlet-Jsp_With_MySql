@@ -15,10 +15,10 @@
 				<tbody>
 					<tr>
 					<th>Numero</th>
-						<th>Code</th>
+					<th>Libelle</th>
 						<th>Coefficient</th>
 						<th>Credit</th>
-						<th>Libelle</th>
+						
 						<th>Volume Horaire Cours</th>
 						<th>Volume Horaire TD</th>
 						<th>Volume Horaire TP</th>
@@ -35,10 +35,10 @@
 						<tr>
 
 							<td><%=i++%></td>
-							<td><c:out value="${liste.code}"></c:out></td>
+							<td><c:out value="${liste.libelle}"></c:out></td>
 							<td><c:out value="${liste.coefficient}"></c:out></td>
 							<td><c:out value="${liste.credit}"></c:out></td>
-							<td><c:out value="${liste.libelle}"></c:out></td>
+							
 							<td><c:out value="${liste.volumec}"></c:out></td>
 							<td><c:out value="${liste.volumetd}"></c:out></td>
 							<td><c:out value="${liste.volumetp}"></c:out></td>
@@ -82,12 +82,12 @@
 <form class="form-horizontal" action="MatiereServlet" method="post">
 			<div class="box-body">
 			<input type="hidden" name="id" value="${requestScope.obj.id }">
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Code</label>
+					<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Libelle</label>
 
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputEmail3"
-							 name="code" value="${requestScope.obj.code }" required>
+							 name="libelle" value="${requestScope.obj.libelle }" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -108,14 +108,7 @@
 				</div>
 				
 				
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Libelle</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="libelle" value="${requestScope.obj.libelle }" required>
-					</div>
-				</div>
+			
 				
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Voulme Horaire Cours</label>

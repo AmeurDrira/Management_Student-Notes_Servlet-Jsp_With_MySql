@@ -15,7 +15,7 @@ public class GroupeImpl implements GroupeInterface {
 
 	public GroupeImpl() {
 		super();
-		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		//emfactory = Persistence.createEntityManagerFactory("Gestion");
 
 	}
 
@@ -82,5 +82,7 @@ public class GroupeImpl implements GroupeInterface {
 		return list;
 
 	}
+	
+	
 
 }

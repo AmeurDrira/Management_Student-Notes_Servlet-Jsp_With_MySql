@@ -15,4 +15,6 @@ public interface GroupeInterface {
 
 	public List<Groupe> getAllGroupe();
 
+	
+
 }

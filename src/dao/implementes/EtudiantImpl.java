@@ -19,6 +19,7 @@ public class EtudiantImpl implements EtudiantInterface {
 		emfactory = Persistence.createEntityManagerFactory("Gestion");
 
 	}
+	
 
 	@Override
 	public void insertEtudiant(Etudiant etudiant) {

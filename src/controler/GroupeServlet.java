@@ -93,11 +93,11 @@ public class GroupeServlet extends HttpServlet {
 		String id = request.getParameter("id");
 
 		if ("".equals(id) && !"".equals(libelle) && !"".equals(abreviation) && !"".equals(code)) {
-			Groupe g = new Groupe(abreviation, Integer.parseInt(code), libelle, niveau);
+			Groupe g = new Groupe(abreviation, libelle, niveau);
 			groupeImpl.insertGroupe(g);
 
 		} else {
-			Groupe g = new Groupe(Integer.parseInt(id), abreviation, Integer.parseInt(code), libelle, niveau);
+			Groupe g = new Groupe(Integer.parseInt(id), abreviation, libelle, niveau);
 			groupeImpl.updateGroupe(g);
 		}
 

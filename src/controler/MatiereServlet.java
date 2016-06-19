@@ -67,21 +67,21 @@ public class MatiereServlet extends HttpServlet {
 		MatiereImpl matiereImpl = new MatiereImpl();
 		String libelle = request.getParameter("libelle");
 		String coefficient = request.getParameter("coefficient");
-		String code = request.getParameter("code");
+	
 		String volumec = request.getParameter("volumec");
 		String volumetp = request.getParameter("volumetp");
 		String volumetd = request.getParameter("volumetd");
 		String credit = request.getParameter("credit");
 		String id = request.getParameter("id");
 
-		if ("".equals(id)  && !"".equals(libelle) && !"".equals(coefficient) && !"".equals(code) && !"".equals(volumec)
+		if ("".equals(id)  && !"".equals(libelle) && !"".equals(coefficient) && !"".equals(volumec)
 				&& !"".equals(volumetp) && !"".equals(volumetd) && !"".equals(credit)) {
-			Matiere m = new Matiere(Integer.parseInt(code), Float.parseFloat(coefficient), Integer.parseInt(credit),
+			Matiere m = new Matiere(Float.parseFloat(coefficient), Integer.parseInt(credit),
 					libelle, Float.parseFloat(volumec), Float.parseFloat(volumetd), Float.parseFloat(volumetp));
 			matiereImpl.insertMatiere(m);
 
 		} else {
-			Matiere m = new Matiere(Integer.parseInt(id), Integer.parseInt(code), Float.parseFloat(coefficient),
+			Matiere m = new Matiere(Integer.parseInt(id), Float.parseFloat(coefficient),
 					Integer.parseInt(credit), libelle, Float.parseFloat(volumec), Float.parseFloat(volumetd),
 					Float.parseFloat(volumetp));
 			matiereImpl.updateMatiere(m);

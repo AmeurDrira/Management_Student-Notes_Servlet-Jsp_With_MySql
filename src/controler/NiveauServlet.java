@@ -50,7 +50,7 @@ public class NiveauServlet extends HttpServlet {
 			request.setAttribute("obj", a);
 
 		}
-
+		niveauImpl.nombreGroup();
 		List<Niveau> liste = niveauImpl.getAllNiveau();
 		request.setAttribute("liste", liste);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/niveauView.jsp");
@@ -70,11 +70,11 @@ public class NiveauServlet extends HttpServlet {
 		String id = request.getParameter("id");
 
 		if ("".equals(id)  && !"".equals(libelle) && !"".equals(code)) {
-			Niveau n = new Niveau(Integer.parseInt(code), libelle);
+			Niveau n = new Niveau( libelle);
 			niveauImpl.insertNiveau(n);
 
 		} else {
-			Niveau n = new Niveau(Integer.parseInt(id), Integer.parseInt(code), libelle);
+			Niveau n = new Niveau(Integer.parseInt(id), libelle);
 			niveauImpl.updateNiveau(n);
 		}
 

@@ -45,6 +45,36 @@ public class Etudiant implements Serializable {
 	public Etudiant() {
 	}
 
+	public Etudiant(int id, String adresse, int cin, String login, String nom, int numeroInscri, String password,
+			String prenom, int tel, Groupe groupe) {
+		super();
+		this.id = id;
+		this.adresse = adresse;
+		this.cin = cin;
+		this.login = login;
+		this.nom = nom;
+		this.numeroInscri = numeroInscri;
+		this.password = password;
+		this.prenom = prenom;
+		this.tel = tel;
+		this.groupe = groupe;
+	}
+	
+
+	public Etudiant(String adresse, int cin, String login, String nom, int numeroInscri, String password, String prenom,
+			int tel, Groupe groupe) {
+		super();
+		this.adresse = adresse;
+		this.cin = cin;
+		this.login = login;
+		this.nom = nom;
+		this.numeroInscri = numeroInscri;
+		this.password = password;
+		this.prenom = prenom;
+		this.tel = tel;
+		this.groupe = groupe;
+	}
+
 	public int getId() {
 		return this.id;
 	}

@@ -39,11 +39,11 @@ public class Matiere implements Serializable {
 	}
 	
 
-	public Matiere(int id, int code, float coefficient, int credit, String libelle, float volumec, float volumetd,
+	public Matiere(int id, float coefficient, int credit, String libelle, float volumec, float volumetd,
 			float volumetp) {
 		super();
 		this.id = id;
-		this.code = code;
+		code=0;
 		this.coefficient = coefficient;
 		this.credit = credit;
 		this.libelle = libelle;
@@ -52,11 +52,11 @@ public class Matiere implements Serializable {
 		this.volumetp = volumetp;
 		
 	}
-	public Matiere(int code, float coefficient, int credit, String libelle, float volumec, float volumetd,
+	public Matiere( float coefficient, int credit, String libelle, float volumec, float volumetd,
 			float volumetp) {
 		super();
 		
-		this.code = code;
+		code=0;
 		this.coefficient = coefficient;
 		this.credit = credit;
 		this.libelle = libelle;

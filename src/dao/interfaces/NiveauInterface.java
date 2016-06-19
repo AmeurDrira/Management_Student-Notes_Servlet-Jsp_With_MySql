@@ -15,4 +15,6 @@ public interface NiveauInterface {
 
 	public List<Niveau> getAllNiveau();
 
+	public void nombreGroup();
+
 }

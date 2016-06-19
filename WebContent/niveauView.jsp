@@ -15,7 +15,7 @@
 				<tbody>
 					<tr>
 					<th>Numero</th>
-						<th>Code</th>
+						
 						<th>Libelle</th>
 						<th>Nombre de Groupe </th>
 						<th>Modifier</th>
@@ -31,7 +31,7 @@
 						<tr>
 
 							<td><%=i++%></td>
-							<td><c:out value="${liste.code}"></c:out></td>
+							
 							<td><c:out value="${liste.libelle}"></c:out></td>
 							<td><c:out value="${liste.nbgroupe}"></c:out></td>
 					
@@ -74,14 +74,7 @@
 <form class="form-horizontal" action="NiveauServlet" method="post">
 			<div class="box-body">
 			<input type="hidden" name="id" value="${requestScope.obj.id }">
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Code</label>
-
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							 name="code" value="${requestScope.obj.code }">
-					</div>
-				</div>
+				
 								
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">Libelle</label>

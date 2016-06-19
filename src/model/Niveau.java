@@ -4,13 +4,12 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the niveau database table.
  * 
  */
 @Entity
-@NamedQuery(name="Niveau.findAll", query="SELECT n FROM Niveau n")
+@NamedQuery(name = "Niveau.findAll", query = "SELECT n FROM Niveau n")
 public class Niveau implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,30 +22,28 @@ public class Niveau implements Serializable {
 
 	private int nbgroupe;
 
-	//bi-directional many-to-one association to Groupe
-	@OneToMany(mappedBy="niveau")
+	// bi-directional many-to-one association to Groupe
+	@OneToMany(mappedBy = "niveau")
 	private List<Groupe> groupes;
 
 	public Niveau() {
 	}
-	
 
-	public Niveau(int id, int code, String libelle) {
+	public Niveau(int id, String libelle) {
 		super();
 		this.id = id;
-		this.code = code;
+		code = 0;
 		this.libelle = libelle;
-			
+
 	}
 
-	public Niveau( int code, String libelle) {
+	public Niveau(String libelle) {
 		super();
-		
-		this.code = code;
-		this.libelle = libelle;
-			
-	}
 
+		code = 0;
+		this.libelle = libelle;
+
+	}
 
 	public int getId() {
 		return this.id;
