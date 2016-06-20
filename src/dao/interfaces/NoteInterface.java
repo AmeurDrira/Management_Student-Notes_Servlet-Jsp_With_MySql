@@ -2,6 +2,7 @@ package dao.interfaces;
 
 import java.util.List;
 
+import model.Etudiant;
 import model.Note;
 
 public interface NoteInterface {
@@ -14,5 +15,7 @@ public interface NoteInterface {
 	public Note findByIdNote(int id);
 
 	public List<Note> getAllNote();
+
+	public List<Note> InsererCompostage(Etudiant etudiant);
 
 }

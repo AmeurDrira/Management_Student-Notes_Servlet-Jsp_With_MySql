@@ -44,6 +44,13 @@ public class Note implements Serializable {
 	public Note() {
 	}
 
+	public Note(float notepresentielle, float notetd, float notetp) {
+		super();
+		this.notepresentielle = notepresentielle;
+		this.notetd = notetd;
+		this.notetp = notetp;
+	}
+
 	public int getId() {
 		return this.id;
 	}

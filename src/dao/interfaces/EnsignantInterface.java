@@ -15,4 +15,6 @@ public interface EnsignantInterface {
 
 	public List<Ensignant> getAllEnsignant();
 
+	public Ensignant findByLoginMotPasse(String login, String pwd);
+
 }

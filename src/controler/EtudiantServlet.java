@@ -1,10 +1,6 @@
 package controler;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.implementes.EtudiantImpl;
+import dao.implementes.GroupeImpl;
+import dao.implementes.NoteImpl;
 import model.Etudiant;
+import model.Groupe;
+import model.Niveau;
+import model.Note;
 
 /**
  * Servlet implementation class EtudiantServlet
@@ -23,80 +24,100 @@ import model.Etudiant;
 @WebServlet("/EtudiantServlet")
 public class EtudiantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EtudiantServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		EtudiantImpl EtudiantImpl = new EtudiantImpl();
+	public EtudiantServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		EtudiantImpl etudiantImpl = new EtudiantImpl();
+		GroupeImpl groupeImpl = new GroupeImpl();
+
+		List<Groupe> listeGroupe = groupeImpl.getAllGroupe();
+		RequestDispatcher rd;
+
 		String action = request.getParameter("action");
+		String idgroupe = request.getParameter("idgroupe");
+		System.out.println(idgroupe);
+
+		if (!(null == idgroupe)) {
+			List<Etudiant> liste = etudiantImpl.findEtudiantbyGroupe(Integer.parseInt(idgroupe));
+			for (Etudiant etudiant : liste) {
+				System.out.println(etudiant.getNom());
+			}
+			request.setAttribute("liste", liste);
+			request.setAttribute("listeGroupe", listeGroupe);
+
+		} else {
+			List<Etudiant> liste = etudiantImpl.getAllEtudiant();
+			request.setAttribute("liste", liste);
+			request.setAttribute("listeGroupe", listeGroupe);
+		}
 
 		if ("delete".equals(action)) {
 			String id = request.getParameter("id");
-			Etudiant e = EtudiantImpl.findByIdEtudiant(Integer.parseInt(id));
-			EtudiantImpl.deleteEtudiant(e);
+			Etudiant e = etudiantImpl.findByIdEtudiant(Integer.parseInt(id));
+			etudiantImpl.deleteEtudiant(e);
 		}
 		if ("update".equals(action)) {
 			String id = request.getParameter("id");
-			Etudiant e = EtudiantImpl.findByIdEtudiant(Integer.parseInt(id));
+			Etudiant e = etudiantImpl.findByIdEtudiant(Integer.parseInt(id));
 			request.setAttribute("obj", e);
 
 		}
 
-		List<Etudiant> liste = EtudiantImpl.getAllEtudiant();
-		request.setAttribute("liste", liste);
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/EtudiantView.jsp");
+		rd = getServletContext().getRequestDispatcher("/EtudiantView.jsp");
 		rd.forward(request, response);
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EtudiantImpl EtudiantImpl = new EtudiantImpl();
-		Date myDate = null;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		EtudiantImpl etudiantImpl = new EtudiantImpl();
+		NoteImpl noteImpl = new NoteImpl();
+		Note note=new Note();
+
+		GroupeImpl groupeImpl = new GroupeImpl();
+		Groupe g = new Groupe();
+		String idetudiant = request.getParameter("idetudiant");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
-		String datenaissance = request.getParameter("dateNaissance");
+		String adresse = request.getParameter("adresse");
+		String numeroInscri = request.getParameter("numeroInscri");
 		String tel = request.getParameter("tel");
 		String cin = request.getParameter("cin");
-		String login = request.getParameter("login");
-		String pwd = request.getParameter("pwd");
-		String id = request.getParameter("id");
 
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String idgroupe = request.getParameter("idgroupe");
+		g = groupeImpl.findByIdGroupe(Integer.parseInt(idgroupe));
 
-		if (datenaissance != null) {
+		if ("".equals(idetudiant)) {
+			System.out.println("cin" + Integer.parseInt(cin));
+			System.out.println("insc" + Integer.parseInt(numeroInscri));
+			System.out.println("tel" + Integer.parseInt(tel));
 
-			try {
-				myDate = (Date) formatter.parse(datenaissance);
-
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		if ("".equals(id) && !"".equals(login) && !"".equals(pwd) && !"".equals(nom) && !"".equals(prenom)
-				&& !"".equals(cin)) {
-			Etudiant e = new Etudiant(Integer.parseInt(cin), myDate, login, nom, pwd, prenom, Integer.parseInt(tel));
-
-			EtudiantImpl.insertEtudiant(e);
+			Etudiant e = new Etudiant(adresse, Integer.parseInt(cin), cin, nom, Integer.parseInt(numeroInscri),
+					numeroInscri, prenom, Integer.parseInt(tel), g);
+			
+			etudiantImpl.insertEtudiant(e);
 
 		} else {
-			Etudiant e = new Etudiant(Integer.parseInt(id), Integer.parseInt(cin), myDate, login, nom, pwd, prenom,
-					Integer.parseInt(tel));
-			EtudiantImpl.updateEtudiant(e);
+			Etudiant e = new Etudiant(Integer.parseInt(idetudiant), adresse, Integer.parseInt(cin), cin, nom,
+					Integer.parseInt(numeroInscri), numeroInscri, prenom, Integer.parseInt(tel), g);
+			etudiantImpl.updateEtudiant(e);
 		}
 		doGet(request, response);
 	}

@@ -7,7 +7,7 @@
 
 	<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">Liste Matiere</h3>
+			<h3 class="box-title">Liste Niveau</h3>
 		</div>
 		<!-- /.box-header -->
 		<div class="box-body no-padding">
@@ -66,7 +66,7 @@
 	<!-- Horizontal Form -->
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">Modifier Matiere</h3>
+			<h3 class="box-title">Ajouter et Modifier Matiere</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
@@ -89,7 +89,7 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 				<button type="reset" class="btn btn-default">Cancel</button>
-				<button type="submit" class="btn btn-info pull-right">Modifier</button>
+				<button type="submit" class="btn btn-info pull-right">Submit </button>
 			</div>
 			<!-- /.box-footer -->
 			</form>

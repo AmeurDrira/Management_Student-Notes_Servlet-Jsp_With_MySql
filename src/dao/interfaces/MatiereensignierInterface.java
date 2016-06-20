@@ -2,6 +2,7 @@ package dao.interfaces;
 
 import java.util.List;
 
+import model.Ensignant;
 import model.Matiereensignier;
 
 public interface MatiereensignierInterface {
@@ -15,5 +16,7 @@ public interface MatiereensignierInterface {
 	public Matiereensignier findByIdMatiereensignier(int id);
 
 	public List<Matiereensignier> getAllMatiereensignier();
+
+	public List<Matiereensignier> getAllMatiereensignierParEnsignant(Ensignant ensignant);
 
 }

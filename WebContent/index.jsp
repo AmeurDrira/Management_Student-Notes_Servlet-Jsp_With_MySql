@@ -32,30 +32,30 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">Sign in to start your session</p>
 
-			<form action="AdminServlet" method="get">
+			<form action="AuthentificationServlet" method="get">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="Login">
+					<input type="text" class="form-control" name="login" required>
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" placeholder="Password">
+					<input type="password" class="form-control" name="pwd" required>
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group">
 					<div class="radio">
 						<label> <input type="radio" name="optionsRadios"
-							id="optionsRadios1" value="option1"> Etudiant
+							id="optionsRadios1" value="etudiant"> Etudiant
 						</label>
 					</div>
 					<div class="radio">
 						<label> <input type="radio" name="optionsRadios"
-							id="optionsRadios2" value="option2"> Ensignant
+							id="optionsRadios2" value="ensignant"> Ensignant
 						</label>
 					</div>
 					<div class="radio">
 						<label> <input type="radio" name="optionsRadios"
-							id="optionsRadios3" value="option3"> Administrateur
+							id="optionsRadios3" value="admin"> Administrateur
 						</label>
 					</div>
 				</div>

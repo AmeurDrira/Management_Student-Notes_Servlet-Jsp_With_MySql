@@ -85,13 +85,12 @@ public class EnsignantServlet extends HttpServlet {
 				myDate = (Date) formatter.parse(datenaissance);
 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}
 
-		if ("".equals(id) && !"".equals(login) && !"".equals(pwd) && !"".equals(nom) && !"".equals(prenom)
-				&& !"".equals(cin)) {
+		if ("".equals(id)) {
 			Ensignant e = new Ensignant(Integer.parseInt(cin), myDate, login, nom, pwd, prenom, Integer.parseInt(tel));
 
 			ensignantImpl.insertEnsignant(e);

@@ -38,6 +38,23 @@ public class Matiereensignier implements Serializable {
 
 	public Matiereensignier() {
 	}
+	
+
+	public Matiereensignier(int id, Groupe groupe, Matiere matiere, Ensignant ensignant) {
+		super();
+		this.id = id;
+		this.groupe = groupe;
+		this.matiere = matiere;
+		this.ensignant = ensignant;
+	}
+	public Matiereensignier( Groupe groupe, Matiere matiere, Ensignant ensignant) {
+		super();
+		
+		this.groupe = groupe;
+		this.matiere = matiere;
+		this.ensignant = ensignant;
+	}
+
 
 	public int getId() {
 		return this.id;

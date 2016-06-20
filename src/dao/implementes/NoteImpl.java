@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dao.interfaces.NoteInterface;
+import model.Etudiant;
 import model.Note;
 
 public class NoteImpl implements NoteInterface {
@@ -15,12 +16,13 @@ public class NoteImpl implements NoteInterface {
 
 	public NoteImpl() {
 		super();
-		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		
 
 	}
 
 	@Override
 	public void insertNote(Note note) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(note);
@@ -32,6 +34,7 @@ public class NoteImpl implements NoteInterface {
 
 	@Override
 	public void updateNote(Note note) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(note);
@@ -45,7 +48,7 @@ public class NoteImpl implements NoteInterface {
 	public void deleteNote(Note note) {
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(note);
+		entitymanager.remove(entitymanager.merge(note));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -54,6 +57,7 @@ public class NoteImpl implements NoteInterface {
 
 	@Override
 	public Note findByIdNote(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Note note = entitymanager.find(Note.class, id);
@@ -63,9 +67,11 @@ public class NoteImpl implements NoteInterface {
 		return note;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Note> getAllNote() {
 		List<Note> list;
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Query query = entitymanager.createQuery("SELECT n from Note n");
@@ -75,5 +81,18 @@ public class NoteImpl implements NoteInterface {
 		emfactory.close();
 		return list;
 	}
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Note> InsererCompostage(Etudiant etudiant) {
+		List<Note> list;
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Query query = entitymanager.createQuery("SELECT n from Note n");
+		list = query.getResultList();
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emfactory.close();
+		return list;
+	}
 }

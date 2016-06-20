@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -82,6 +83,24 @@ public class EnsignantImpl implements EnsignantInterface {
 		entitymanager.close();
 		emfactory.close();
 		return list;
+	}
+	@Override
+	public Ensignant findByLoginMotPasse(String login, String pwd) {
+		Ensignant en = new Ensignant();
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Query query = entitymanager.createQuery("Select e FROM Ensignant e WHERE e.login = :login and e.password= :pwd");
+		query.setParameter("login", login);
+		query.setParameter("pwd", pwd);
+		
+		try{
+			return en = (Ensignant) query.getSingleResult();		
+	    } catch(NoResultException e) {
+	        return en;
+	    }
+		
+		
 	}
 	
 

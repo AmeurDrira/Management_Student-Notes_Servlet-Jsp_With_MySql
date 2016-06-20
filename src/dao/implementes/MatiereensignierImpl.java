@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dao.interfaces.MatiereensignierInterface;
+import model.Ensignant;
 import model.Matiereensignier;
 
 public class MatiereensignierImpl implements MatiereensignierInterface {
@@ -15,11 +16,12 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 
 	public MatiereensignierImpl() {
 		super();
-		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		// emfactory = Persistence.createEntityManagerFactory("Gestion");
 	}
 
 	@Override
 	public void insertMatiereensignier(Matiereensignier matiereensignier) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.persist(matiereensignier);
@@ -31,6 +33,7 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 
 	@Override
 	public void updateMatiereensignier(Matiereensignier matiereensignier) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		entitymanager.merge(matiereensignier);
@@ -42,9 +45,10 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 
 	@Override
 	public void deleteMatiereensignier(Matiereensignier matiereensignier) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		entitymanager.remove(matiereensignier);
+		entitymanager.remove(entitymanager.merge(matiereensignier));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
@@ -53,6 +57,7 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 
 	@Override
 	public Matiereensignier findByIdMatiereensignier(int id) {
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Matiereensignier matiereensignier = entitymanager.find(Matiereensignier.class, id);
@@ -62,12 +67,30 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 		return matiereensignier;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Matiereensignier> getAllMatiereensignier() {
+
 		List<Matiereensignier> list;
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Query query = entitymanager.createQuery("SELECT me from Matiereensignier me");
+		list = query.getResultList();
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emfactory.close();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Matiereensignier> getAllMatiereensignierParEnsignant(Ensignant ensignant) {
+		List<Matiereensignier> list;
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Query query = entitymanager.createQuery("SELECT me from Matiereensignier me WHERE me.ensignant.id = :id");
+		query.setParameter("id", (int)ensignant.getId() );
 		list = query.getResultList();
 		entitymanager.getTransaction().commit();
 		entitymanager.close();

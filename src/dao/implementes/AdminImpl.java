@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dao.interfaces.AdminInterface;
 import model.Admin;
+import model.Ensignant;
 
 public class AdminImpl implements AdminInterface {
 
@@ -81,6 +83,21 @@ public class AdminImpl implements AdminInterface {
 		entitymanager.close();
 		emfactory.close();
 		return list;
+	}
+
+	public Admin findByLoginMotPasse(String login, String pwd) {
+		Admin en = new Admin();
+		emfactory = Persistence.createEntityManagerFactory("Gestion");
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Query query = entitymanager.createQuery("Select e FROM Admin e WHERE e.login = :login and e.password= :pwd");
+		query.setParameter("login", login);
+		query.setParameter("pwd", pwd);
+		try{
+			return en = (Admin) query.getSingleResult();		
+	    } catch(NoResultException e) {
+	        return en;
+	    }
 	}
 
 }
