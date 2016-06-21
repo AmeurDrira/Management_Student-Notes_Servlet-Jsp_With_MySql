@@ -3,13 +3,12 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the note database table.
  * 
  */
 @Entity
-@NamedQuery(name="Note.findAll", query="SELECT n FROM Note n")
+@NamedQuery(name = "Note.findAll", query = "SELECT n FROM Note n")
 public class Note implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,29 +25,60 @@ public class Note implements Serializable {
 
 	private int numcompostage;
 
-	//bi-directional many-to-one association to Etudiant
+	// bi-directional many-to-one association to Etudiant
 	@ManyToOne
-	@JoinColumn(name="idetudiant")
+	@JoinColumn(name = "idetudiant")
 	private Etudiant etudiant;
 
-	//bi-directional many-to-one association to Session
+	// bi-directional many-to-one association to Session
 	@ManyToOne
-	@JoinColumn(name="idsession")
+	@JoinColumn(name = "idsession")
 	private Session session;
 
-	//bi-directional many-to-one association to Matiereensignier
+	// bi-directional many-to-one association to Matiereensignier
 	@ManyToOne
-	@JoinColumn(name="idmatierensignier")
+	@JoinColumn(name = "idmatierensignier")
 	private Matiereensignier matiereensignier;
 
 	public Note() {
 	}
 
-	public Note(float notepresentielle, float notetd, float notetp) {
+	public Note(int numcompostage, Etudiant etudiant, Session session, Matiereensignier matiereensignier) {
 		super();
+		this.numcompostage = numcompostage;
+		this.etudiant = etudiant;
+		this.session = session;
+		this.matiereensignier = matiereensignier;
+	}
+
+	
+
+	public Note(int id, float notepresentielle, float notetd, float notetp, int numcompostage, Etudiant etudiant,
+			Session session, Matiereensignier matiereensignier) {
+		super();
+		this.id = id;
 		this.notepresentielle = notepresentielle;
 		this.notetd = notetd;
 		this.notetp = notetp;
+		this.numcompostage = numcompostage;
+		this.etudiant = etudiant;
+		this.session = session;
+		this.matiereensignier = matiereensignier;
+	}
+	
+
+	public Note(int id, float noteexamen, float notepresentielle, float notetd, float notetp, int numcompostage,
+			Etudiant etudiant, Session session, Matiereensignier matiereensignier) {
+		super();
+		this.id = id;
+		this.noteexamen = noteexamen;
+		this.notepresentielle = notepresentielle;
+		this.notetd = notetd;
+		this.notetp = notetp;
+		this.numcompostage = numcompostage;
+		this.etudiant = etudiant;
+		this.session = session;
+		this.matiereensignier = matiereensignier;
 	}
 
 	public int getId() {

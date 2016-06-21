@@ -28,17 +28,18 @@ import model.Note;
 import model.Session;
 
 /**
- * Servlet implementation class DevoirSurveilleServlet
+ * Servlet implementation class EspaceEnsignantServlet
  */
-@WebServlet("/DevoirSurveilleServlet")
-public class DevoirSurveilleServlet extends HttpServlet {
+@WebServlet("/ExamenPrincipaleServlet")
+public class ExamenControleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DevoirSurveilleServlet() {
+	public ExamenControleServlet() {
 		super();
+
 	}
 
 	/**
@@ -52,29 +53,38 @@ public class DevoirSurveilleServlet extends HttpServlet {
 		MatiereImpl matiereImpl = new MatiereImpl();
 		EtudiantImpl etudiantImpl = new EtudiantImpl();
 		List<Matiereensignier> list;
+		List<Note> listeNote;
 		List<Etudiant> listetudiant;
+		List<Matiere> listeMatiere;
+		List<Groupe> listeGroupe;
 		Ensignant e;
+		
 		HttpSession session;
-
 		session = request.getSession();
+		listeGroupe=groupeImpl.getAllGroupe();
+		listeMatiere=matiereImpl.getAllMatiere();
+		
 		e = (Ensignant) session.getAttribute("ensignant");
 		list = matiereensignierImpl.getAllMatiereensignierParEnsignant(e);
 		request.setAttribute("ensignant", e);
-		request.setAttribute("list", list);
+		request.setAttribute("listeGroupe", listeGroupe);
+		request.setAttribute("listeMatiere", listeMatiere);
+
 
 		String idgroup = request.getParameter("idgroupe");
 		String idmatiere = request.getParameter("idmatiere");
 
 		if (!(null == idgroup) && !(null == idmatiere)) {
-			listetudiant = etudiantImpl.findEtudiantbyGroupe(Integer.parseInt(idgroup));
 			Matiere matiere = matiereImpl.findByIdMatiere(Integer.parseInt(idmatiere));
 			Groupe groupe = groupeImpl.findByIdGroupe(Integer.parseInt(idgroup));
-			request.setAttribute("listetudiant", listetudiant);
+			NoteImpl noteImpl=new NoteImpl();
+			listeNote=noteImpl.getAllNoteByGroupMatiere(groupe,matiere);
+			request.setAttribute("listeNote", listeNote);
 			request.setAttribute("matiere", matiere);
 			request.setAttribute("groupe", groupe);
 		}
 
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/EspaceEnsignantView.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/EspaceEnsignantPrincipaleView.jsp");
 		rd.forward(request, response);
 	}
 
@@ -82,7 +92,6 @@ public class DevoirSurveilleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MatiereensignierImpl matiereensignierImpl = new MatiereensignierImpl();
@@ -98,20 +107,19 @@ public class DevoirSurveilleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Enumeration param = request.getParameterNames();
 		List headerValuesList = Collections.list(param);
-		
+
 		int idmatiere = Integer.parseInt(request.getParameter("idmatiere"));
 		int idgroupe = Integer.parseInt(request.getParameter("idgroupe"));
-		
+
 		listetudiant = etudiantImpl.findEtudiantbyGroupe(idgroupe);
-		
+
 		e = (Ensignant) session.getAttribute("ensignant");
 
 		Matiere matiere = matiereImpl.findByIdMatiere(idmatiere);
-		
-		
+
 		Groupe groupe = groupeImpl.findByIdGroupe(idgroupe);
-		listeNote=noteImpl.getAllNoteByGroupMatiere(groupe,matiere);
-		
+		listeNote = noteImpl.getAllNoteByGroupMatiere(groupe, matiere);
+
 		Session sessionObj = sessionImpl.findSessionPrincipale();
 		Matiereensignier matiereensignier;
 
@@ -119,32 +127,25 @@ public class DevoirSurveilleServlet extends HttpServlet {
 
 		for (Note note : listeNote) {
 			Etudiant etudiantObj = etudiantImpl.findByIdEtudiant(note.getEtudiant().getId());
-			float notetp = 0;
-			float notetd = 0;
-			float notepresentielle = 0;
+			float noteprincipale = 0;
+
 			for (Object headerValueObj : headerValuesList) {
 				String fieldName = headerValueObj.toString();
+				if (String.valueOf(note.getNumcompostage()).equals(fieldName))
+					noteprincipale = Float.parseFloat(request.getParameter(fieldName));
 
-				if (fieldName.contains("TP" + etudiantObj.getId()))
-					notetp = Float.parseFloat(request.getParameter(fieldName));
-				if (fieldName.contains("TD" + etudiantObj.getId()))
-					notetd = Float.parseFloat(request.getParameter(fieldName));
-				if (fieldName.contains("TPS" + etudiantObj.getId()))
-					notepresentielle = Float.parseFloat(request.getParameter(fieldName));
 			}
-			if (notepresentielle != 0 && notetd != 0 && notetd != 0) {
+			if (noteprincipale != 0) {
 				System.out.println("-----------------");
-				System.out.println(notetp);
-				System.out.println(notetd);
-				System.out.println(notepresentielle);
+				System.out.println(noteprincipale);
 				System.out.println(note.getEtudiant().getNom());
 				System.out.println("-----------------");
-				note = new Note(note.getId(),notepresentielle, notetd, notetp,note.getNumcompostage(), etudiantObj, sessionObj, matiereensignier);
+				note = new Note(note.getId(), noteprincipale, note.getNotepresentielle(), note.getNotetd(),
+						note.getNotetp(), note.getNumcompostage(), etudiantObj, sessionObj, matiereensignier);
 				noteImpl.updateNote(note);
 			}
 
 		}
-
 		doGet(request, response);
 	}
 

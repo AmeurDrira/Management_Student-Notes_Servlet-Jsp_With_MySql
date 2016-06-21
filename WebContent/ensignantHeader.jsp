@@ -44,13 +44,14 @@
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>  <![endif]-->
 </head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>Gestion</b>Etudiant</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>Gestion</b>Etudiant</span>
+				<span class="logo-mini"><b>Gestion</b>Ensignant</span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b>Gestion</b>Ensignant</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -67,8 +68,7 @@
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image"> <span class="hidden-xs">Alexander
-									Pierce</span>
+								alt="User Image"> <span class="hidden-xs"><c:out value="${ensignant.nom} ${ensignant.prenom}"></c:out></span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -119,7 +119,7 @@
 							alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p><c:out value="${ensignant.nom} ${ensignant.prenom}"></c:out></p>
 						<a href="#"> Online</a>
 					</div>
 				</div>
@@ -138,37 +138,16 @@
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 
-					<li class="treeview"><a href="AdminServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Administrateur</span>
+					<li class="treeview"><a href="DevoirSurveilleServlet"> <i
+							class="fa fa-edit"></i> <span>Gestion Note Devoir surveille  </span>
 					</a></li>
-					<li class="treeview"><a href="EnsignantServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Ensignant</span>
+					<li class="treeview"><a href="ExamenPrincipaleServlet"> <i
+							class="fa fa-edit"></i> <span>Gestion Note Principale</span>
 					</a></li>
-					<li class="treeview"><a href="MatiereServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Matiere</span>
-					</a></li>
-					<li class="treeview"><a href="NiveauServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Niveau</span>
-
-					</a></li>
-					<li class="treeview"><a href="GroupeServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Groupe</span>
+					<li class="treeview"><a href="#"> <i
+							class="fa fa-edit"></i> <span>Gestion Note Controle</span>
 					</a></li>
 					
-					
-					<li class="treeview"><a href="MatiereEnsignantGroupServlet">
-							<i class="fa fa-edit"></i> <span>Gestion Matiere Ens Groupe </span>
-					</a></li>
-
-
-					<li class="treeview"><a href="EtudiantServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Etudiant</span>
-					</a></li>
-					<li class="treeview"><a href="CompostageServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Compostage</span>
-					</a></li>
-
-
 
 				</ul>
 			</section>

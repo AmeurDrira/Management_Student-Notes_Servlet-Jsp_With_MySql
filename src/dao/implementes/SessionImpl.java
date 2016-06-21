@@ -60,6 +60,7 @@ public class SessionImpl implements SessionInterface {
 		return session;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Session> getAllSession() {
 		List<Session> list;
@@ -71,6 +72,29 @@ public class SessionImpl implements SessionInterface {
 		entitymanager.close();
 		emfactory.close();
 		return list;
+	}
+
+	@Override
+	public Session findSessionPrincipale() {
+
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Session session = entitymanager.find(Session.class, 1);
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emfactory.close();
+		return session;
+	}
+
+	@Override
+	public Session findSessionControle() {
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+		Session session = entitymanager.find(Session.class, 2);
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emfactory.close();
+		return session;
 	}
 
 }

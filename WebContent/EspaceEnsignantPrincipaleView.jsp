@@ -10,16 +10,16 @@
 		<div class="box-header with-border">
 			<h3 class="box-title">Liste Groupe</h3>
 		</div>
-		<form class="form-horizontal" action="DevoirSurveilleServlet" method="get">
+		<form class="form-horizontal" action="ExamenPrincipaleServlet" method="get">
 			<div class="box-body">
 				<div class="form-group">
                   
                   <label for="inputEmail3" class="col-sm-2 control-label">Groupe</label>
                   <div class="col-sm-6">
                   <select class="form-control" name="idgroupe">
-                 		 <c:forEach items="${requestScope.list}" var="list">          
+                 		 <c:forEach items="${requestScope.listeGroupe}" var="listeGroupe">          
                   						
-						<option value='<c:out value="${list.groupe.id}"></c:out>' ><c:out value="${list.groupe.libelle}"></c:out></option>	
+						<option value='<c:out value="${listeGroupe.id}"></c:out>' ><c:out value="${listeGroupe.libelle}"></c:out></option>	
 					</c:forEach>									
                    </select>
                   
@@ -30,9 +30,9 @@
                   <label for="inputEmail3" class="col-sm-2 control-label">Matiere</label>
                   <div class="col-sm-6">
                   <select class="form-control" name="idmatiere">
-                 		 <c:forEach items="${requestScope.list}" var="list">          
+                 		 <c:forEach items="${requestScope.listeMatiere}" var="listeMatiere">          
                   						
-						<option value='<c:out value="${list.matiere.id}"></c:out>' ><c:out value="${list.matiere.libelle}"></c:out></option>	
+						<option value='<c:out value="${listeMatiere.id}"></c:out>' ><c:out value="${listeMatiere.libelle}"></c:out></option>	
 					</c:forEach>									
                    </select>
                   
@@ -60,12 +60,12 @@
 	<!-- Horizontal Form -->
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">Saisie Note De  ${requestScope.groupe.libelle }   Pour la Matiere   ${requestScope.matiere.libelle }</h3>
+			<h3 class="box-title">Saisie Note De  ${requestScope.groupe.libelle }   Pour la Matiere   ${requestScope.matiere.libelle } Session Principale</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
 	
-<form class="form-horizontal" action="DevoirSurveilleServlet" method="post">
+<form class="form-horizontal" action="ExamenPrincipaleServlet" method="post">
 <input type="hidden" name="idgroupe" value="${requestScope.groupe.id }">
 <input type="hidden" name="idmatiere" value="${requestScope.matiere.id }">
 
@@ -74,22 +74,18 @@
 				<tbody>
 					<tr>
 						<th>Numero</th>
-						<th>Nom et Prenom</th>
-						<th>Note TP</th>
-						<th>Note TD</th>
-						<th>Note Presentielle</th>			
+						<th>Numero Compostage</th>
+						<th>Note Examen Principale</th>			
 					</tr>
 					<%
 						int i = 1;
 					%>
-					<c:forEach items="${requestScope.listetudiant}" var="listetudiant">
+					<c:forEach items="${requestScope.listeNote}" var="listeNote">
 						<tr>
 							<td><%=i++%></td>
-							<td><c:out value="${listetudiant.nom} ${listetudiant.prenom}"></c:out></td>
-							<td><input type="number" class="form-control" name="TP${listetudiant.id}" required/></td>
-							<td><input type="number" class="form-control"  name="TD${listetudiant.id}"required></td>
-							<td><input type="number" class="form-control"  name="TPS${listetudiant.id}"required ></td>
-							
+							<td><c:out value="${listeNote.numcompostage}"></c:out></td>
+							<td><input type="number" class="form-control" name="${listeNote.numcompostage}" required/></td>
+													
 
 						</tr>
 					</c:forEach>

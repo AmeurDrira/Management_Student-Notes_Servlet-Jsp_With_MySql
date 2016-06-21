@@ -3,6 +3,9 @@ package dao.interfaces;
 import java.util.List;
 
 import model.Etudiant;
+import model.Groupe;
+import model.Matiere;
+import model.Matiereensignier;
 import model.Note;
 
 public interface NoteInterface {
@@ -16,6 +19,16 @@ public interface NoteInterface {
 
 	public List<Note> getAllNote();
 
-	public List<Note> InsererCompostage(Etudiant etudiant);
+	public void InsererCompostageControle();
+
+	public void InsererCompostagePrincipale(Etudiant etudiant, Matiereensignier matiereensignier);
+
+	public List<Note> getAllNoteByGroup(Groupe groupe);
+
+	public Note getAllNoteByEtudiant(Etudiant etudiant, Matiere matiere);
+
+	public List<Note> getAllNoteByGroupMatiere(Groupe groupe, Matiere matiere);
+
+	public List<Note> getAllNoteByEtudiant(Etudiant etudiant);
 
 }

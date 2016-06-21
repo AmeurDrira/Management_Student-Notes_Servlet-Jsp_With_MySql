@@ -44,6 +44,7 @@
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>  <![endif]-->
 </head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<header class="main-header">
@@ -67,8 +68,10 @@
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image"> <span class="hidden-xs">Alexander
-									Pierce</span>
+								alt="User Image"> <span class="hidden-xs">
+						<c:out value="${etudiant.nom} ${etudiant.prenom}"></c:out>
+								
+									</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -99,7 +102,7 @@
 										<a href="#" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										<a href="index.jsp" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
 							</ul></li>
@@ -119,7 +122,7 @@
 							alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p><c:out value="${etudiant.nom} ${etudiant.prenom}"></c:out></p>
 						<a href="#"> Online</a>
 					</div>
 				</div>
@@ -138,15 +141,9 @@
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 
-					<li class="treeview"><a href="DevoirSurveilleServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Note Devoir surveille  </span>
-					</a></li>
-					<li class="treeview"><a href="EnsignantServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Note Principale</span>
-					</a></li>
-					<li class="treeview"><a href="MatiereServlet"> <i
-							class="fa fa-edit"></i> <span>Gestion Note Controle</span>
-					</a></li>
+					<li class="treeview"><a href="EspaceEtudiantServlet"> <i
+							class="fa fa-edit"></i> <span>Votre Relevait Note </span>
+				
 					
 
 				</ul>
@@ -158,7 +155,7 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Dashboard <small>Control panel</small>
+					Les Note DE <small><c:out value="${etudiant.nom} ${etudiant.prenom}"></c:out></small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"> Home</a></li>

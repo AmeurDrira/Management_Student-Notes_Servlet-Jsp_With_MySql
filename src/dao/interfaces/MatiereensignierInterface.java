@@ -3,6 +3,8 @@ package dao.interfaces;
 import java.util.List;
 
 import model.Ensignant;
+import model.Groupe;
+import model.Matiere;
 import model.Matiereensignier;
 
 public interface MatiereensignierInterface {
@@ -18,5 +20,9 @@ public interface MatiereensignierInterface {
 	public List<Matiereensignier> getAllMatiereensignier();
 
 	public List<Matiereensignier> getAllMatiereensignierParEnsignant(Ensignant ensignant);
+
+	public Matiereensignier findMatiereensignierParMatGroupEns(Matiere matiere, Groupe groupe, Ensignant e);
+
+	public Matiereensignier findMatiereensignierParMatGroup(Matiere matiere, Groupe groupe);
 
 }

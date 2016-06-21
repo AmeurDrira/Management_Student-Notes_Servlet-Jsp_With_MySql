@@ -81,7 +81,8 @@ public class AuthentificationServlet extends HttpServlet {
 				rd = getServletContext().getRequestDispatcher("/EspaceEnsignantView.jsp");
 				rd.forward(request, response);
 
-			}  else {
+			}   
+			else {
 				rd = getServletContext().getRequestDispatcher("/indexErreur.jsp");
 				rd.forward(request, response);
 			}

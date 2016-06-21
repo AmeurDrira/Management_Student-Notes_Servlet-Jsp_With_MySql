@@ -15,4 +15,8 @@ public interface SessionInterface {
 
 	public List<Session> getAllSession();
 
+	public Session findSessionPrincipale();
+
+	public Session findSessionControle();
+
 }
