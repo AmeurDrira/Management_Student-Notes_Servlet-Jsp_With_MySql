@@ -73,7 +73,7 @@
 	<!-- Horizontal Form -->
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">Modifier Liste Matiere Ensignant Group</h3>
+			<h3 class="box-title">Ajouter Modifier Liste Matiere Ensignant Group</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->

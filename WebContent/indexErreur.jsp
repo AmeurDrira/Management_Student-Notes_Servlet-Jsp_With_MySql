@@ -55,7 +55,7 @@
 					</div>
 					<div class="radio">
 						<label> <input type="radio" name="optionsRadios"
-							id="optionsRadios2" value="enasignant"> Ensignant
+							id="optionsRadios2" value="ensignant"> Ensignant
 						</label>
 					</div>
 					<div class="radio">

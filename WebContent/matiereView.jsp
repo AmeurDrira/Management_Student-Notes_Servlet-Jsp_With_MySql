@@ -74,7 +74,7 @@
 	<!-- Horizontal Form -->
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">Modifier Matiere</h3>
+			<h3 class="box-title">Ajouter ET Modifier Matiere</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
@@ -142,7 +142,7 @@
 			<!-- /.box-body -->
 			<div class="box-footer">
 				<button type="reset" class="btn btn-default">Cancel</button>
-				<button type="submit" class="btn btn-info pull-right">Modifier</button>
+				<button type="submit" class="btn btn-info pull-right">Submit</button>
 			</div>
 			<!-- /.box-footer -->
 			</form>
