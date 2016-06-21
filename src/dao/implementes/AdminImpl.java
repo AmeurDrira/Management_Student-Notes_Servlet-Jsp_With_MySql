@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import dao.interfaces.AdminInterface;
 import model.Admin;
-import model.Ensignant;
 
 public class AdminImpl implements AdminInterface {
 
@@ -50,7 +49,7 @@ public class AdminImpl implements AdminInterface {
 		emfactory = Persistence.createEntityManagerFactory("Gestion");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-	
+
 		entitymanager.remove(entitymanager.merge(admin));
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
@@ -93,11 +92,11 @@ public class AdminImpl implements AdminInterface {
 		Query query = entitymanager.createQuery("Select e FROM Admin e WHERE e.login = :login and e.password= :pwd");
 		query.setParameter("login", login);
 		query.setParameter("pwd", pwd);
-		try{
-			return en = (Admin) query.getSingleResult();		
-	    } catch(NoResultException e) {
-	        return en;
-	    }
+		try {
+			return en = (Admin) query.getSingleResult();
+		} catch (NoResultException e) {
+			return en;
+		}
 	}
 
 }

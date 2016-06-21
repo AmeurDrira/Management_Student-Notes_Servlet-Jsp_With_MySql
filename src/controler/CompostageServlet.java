@@ -15,7 +15,6 @@ import dao.implementes.GroupeImpl;
 import dao.implementes.MatiereImpl;
 import dao.implementes.MatiereensignierImpl;
 import dao.implementes.NoteImpl;
-import model.Ensignant;
 import model.Etudiant;
 import model.Groupe;
 import model.Matiere;
@@ -43,47 +42,40 @@ public class CompostageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		MatiereensignierImpl matiereensignierImpl = new MatiereensignierImpl();
 		GroupeImpl groupeImpl = new GroupeImpl();
 		MatiereImpl matiereImpl = new MatiereImpl();
 		EtudiantImpl etudiantImpl = new EtudiantImpl();
-		NoteImpl noteImpl=new NoteImpl();
-		List<Matiereensignier> listmgen;
+		NoteImpl noteImpl = new NoteImpl();
+
 		List<Etudiant> listetudiant;
 		List<Groupe> listeGroupe;
 		List<Matiere> listeMatiere;
 		List<Note> listeNote;
 
-		
-		
 		listeGroupe = groupeImpl.getAllGroupe();
 		listeMatiere = matiereImpl.getAllMatiere();
 
-		
 		request.setAttribute("listeGroupe", listeGroupe);
 		request.setAttribute("listeMatiere", listeMatiere);
-
-		
 
 		String idgroup = request.getParameter("idgroupe");
 		String idmatiere = request.getParameter("idmatiere");
 
 		if (!(null == idgroup) && !(null == idmatiere)) {
 			Groupe groupe = groupeImpl.findByIdGroupe(Integer.parseInt(idgroup));
-			Matiere matiere=matiereImpl.findByIdMatiere(Integer.parseInt(idmatiere));
-			Matiereensignier matiereensignier=matiereensignierImpl.findMatiereensignierParMatGroup(matiere, groupe);			
+			Matiere matiere = matiereImpl.findByIdMatiere(Integer.parseInt(idmatiere));
+			Matiereensignier matiereensignier = matiereensignierImpl.findMatiereensignierParMatGroup(matiere, groupe);
 			listetudiant = etudiantImpl.findEtudiantbyGroupe(matiereensignier.getGroupe().getId());
-			for(Etudiant etudiant:listetudiant){
-				noteImpl.InsererCompostagePrincipale(etudiant,matiereensignier);
+			for (Etudiant etudiant : listetudiant) {
+				noteImpl.InsererCompostagePrincipale(etudiant, matiereensignier);
 			}
-			listeNote=noteImpl.getAllNoteByGroup(groupe);
+			listeNote = noteImpl.getAllNoteByGroup(groupe);
 			request.setAttribute("listeNote", listeNote);
-			
-			
+
 		}
 
-		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/CompostageView.jsp");
 		rd.forward(request, response);
 	}

@@ -12,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.implementes.EtudiantImpl;
 import dao.implementes.GroupeImpl;
-import dao.implementes.NoteImpl;
 import model.Etudiant;
 import model.Groupe;
-import model.Niveau;
-import model.Note;
 
 /**
  * Servlet implementation class EtudiantServlet
@@ -88,8 +85,6 @@ public class EtudiantServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		EtudiantImpl etudiantImpl = new EtudiantImpl();
-		NoteImpl noteImpl = new NoteImpl();
-		Note note=new Note();
 
 		GroupeImpl groupeImpl = new GroupeImpl();
 		Groupe g = new Groupe();
@@ -111,7 +106,7 @@ public class EtudiantServlet extends HttpServlet {
 
 			Etudiant e = new Etudiant(adresse, Integer.parseInt(cin), cin, nom, Integer.parseInt(numeroInscri),
 					numeroInscri, prenom, Integer.parseInt(tel), g);
-			
+
 			etudiantImpl.insertEtudiant(e);
 
 		} else {

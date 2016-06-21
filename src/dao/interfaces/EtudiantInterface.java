@@ -3,7 +3,6 @@ package dao.interfaces;
 import java.util.List;
 
 import model.Etudiant;
-import model.Groupe;
 
 public interface EtudiantInterface {
 	public void insertEtudiant(Etudiant etudiant);
@@ -19,6 +18,5 @@ public interface EtudiantInterface {
 	public List<Etudiant> findEtudiantbyGroupe(int id);
 
 	public Etudiant findByLoginMotPasse(String login, String pwd);
-
 
 }

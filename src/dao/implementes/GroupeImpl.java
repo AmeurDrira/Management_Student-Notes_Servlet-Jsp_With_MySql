@@ -15,7 +15,6 @@ public class GroupeImpl implements GroupeInterface {
 
 	public GroupeImpl() {
 		super();
-		//emfactory = Persistence.createEntityManagerFactory("Gestion");
 
 	}
 

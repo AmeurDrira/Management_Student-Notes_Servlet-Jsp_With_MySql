@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dao.interfaces.EtudiantInterface;
-import model.Ensignant;
 import model.Etudiant;
 
 public class EtudiantImpl implements EtudiantInterface {
@@ -111,12 +110,12 @@ public class EtudiantImpl implements EtudiantInterface {
 		Query query = entitymanager.createQuery("Select e FROM Etudiant e WHERE e.login = :login and e.password= :pwd");
 		query.setParameter("login", login);
 		query.setParameter("pwd", pwd);
-		try{
-			return en = (Etudiant) query.getSingleResult();		
-	    } catch(NoResultException e) {
-	        return en;
-	    }
-		
+		try {
+			return en = (Etudiant) query.getSingleResult();
+		} catch (NoResultException e) {
+			return en;
+		}
+
 	}
-	
+
 }

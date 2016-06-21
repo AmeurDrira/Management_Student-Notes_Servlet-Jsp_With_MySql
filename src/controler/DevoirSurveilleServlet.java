@@ -92,7 +92,7 @@ public class DevoirSurveilleServlet extends HttpServlet {
 		NoteImpl noteImpl = new NoteImpl();
 		SessionImpl sessionImpl = new SessionImpl();
 
-		List<Etudiant> listetudiant;
+		
 		List<Note> listeNote;
 		Ensignant e;
 		HttpSession session = request.getSession();
@@ -102,7 +102,6 @@ public class DevoirSurveilleServlet extends HttpServlet {
 		int idmatiere = Integer.parseInt(request.getParameter("idmatiere"));
 		int idgroupe = Integer.parseInt(request.getParameter("idgroupe"));
 		
-		listetudiant = etudiantImpl.findEtudiantbyGroupe(idgroupe);
 		
 		e = (Ensignant) session.getAttribute("ensignant");
 

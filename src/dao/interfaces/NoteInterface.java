@@ -19,7 +19,7 @@ public interface NoteInterface {
 
 	public List<Note> getAllNote();
 
-	public void InsererCompostageControle();
+	public void InsererCompostageControle(Etudiant etudiant, Matiereensignier matiereensignier);
 
 	public void InsererCompostagePrincipale(Etudiant etudiant, Matiereensignier matiereensignier);
 
@@ -30,5 +30,7 @@ public interface NoteInterface {
 	public List<Note> getAllNoteByGroupMatiere(Groupe groupe, Matiere matiere);
 
 	public List<Note> getAllNoteByEtudiant(Etudiant etudiant);
+
+	public String compostageCode();
 
 }

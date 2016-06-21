@@ -10,7 +10,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dao.interfaces.NoteInterface;
-import model.Ensignant;
 import model.Etudiant;
 import model.Groupe;
 import model.Matiere;
@@ -106,6 +105,7 @@ public class NoteImpl implements NoteInterface {
 
 	}
 
+	@Override
 	public String compostageCode() {
 		String AB = "0123456789113465752381679765457890796854635421324356789077357556";
 		SecureRandom rnd = new SecureRandom();
@@ -117,30 +117,19 @@ public class NoteImpl implements NoteInterface {
 	}
 
 	@Override
-	public void InsererCompostageControle() {
-		MatiereensignierImpl matiereensignierImpl = new MatiereensignierImpl();
-
-		EtudiantImpl etudiantImpl = new EtudiantImpl();
-
-		List<Matiereensignier> listMatiereensignier;
-		List<Etudiant> listEtudiant;
-
-		listMatiereensignier = matiereensignierImpl.getAllMatiereensignier();
-
+	public void InsererCompostageControle(Etudiant etudiant, Matiereensignier matiereensignier) {
 		SessionImpl sessionImpl = new SessionImpl();
 		Session sessionObj = sessionImpl.findSessionControle();
 		NoteImpl noteImpl = new NoteImpl();
-		Note note;
+		Note note = null, noteVerif = null;
+		noteVerif = noteImpl.getAllNoteByEtudiant(etudiant, matiereensignier.getMatiere());
 
-		for (Matiereensignier lme : listMatiereensignier) {
-			listEtudiant = etudiantImpl.findEtudiantbyGroupe(lme.getGroupe().getId());
-			for (Etudiant etudiant : listEtudiant) {
-				note = new Note(etudiant.getCin() + sessionObj.getId() + etudiant.getNumeroInscri()
-						+ lme.getGroupe().getId() + etudiant.getId(), etudiant, sessionObj, lme);
-				noteImpl.insertNote(note);
-			}
+		if ((null == noteVerif) || (noteVerif.getEtudiant().getId() != etudiant.getId()
+				&& noteVerif.getMatiereensignier().getMatiere().getId() != matiereensignier.getMatiere().getId())) {
+			String comp = compostageCode();
+			note = new Note(Integer.parseInt(comp), etudiant, sessionObj, matiereensignier);
+			noteImpl.insertNote(note);
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,6 +148,7 @@ public class NoteImpl implements NoteInterface {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Note> getAllNoteByGroupMatiere(Groupe groupe, Matiere matiere) {
 		List<Note> list;
@@ -176,7 +166,6 @@ public class NoteImpl implements NoteInterface {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Note getAllNoteByEtudiant(Etudiant etudiant, Matiere matiere) {
 		Note en = null;
@@ -204,11 +193,11 @@ public class NoteImpl implements NoteInterface {
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		Query query = entitymanager.createQuery("SELECT n from Note n WHERE n.etudiant.id = :id ");
-		query.setParameter("id", etudiant.getId());		
+		query.setParameter("id", etudiant.getId());
 		list = query.getResultList();
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
-		return  list;
+		return list;
 	}
 }

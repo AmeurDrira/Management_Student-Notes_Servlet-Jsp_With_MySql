@@ -14,12 +14,10 @@ import dao.implementes.EnsignantImpl;
 import dao.implementes.GroupeImpl;
 import dao.implementes.MatiereImpl;
 import dao.implementes.MatiereensignierImpl;
-import dao.implementes.NiveauImpl;
 import model.Ensignant;
 import model.Groupe;
 import model.Matiere;
 import model.Matiereensignier;
-import model.Niveau;
 
 /**
  * Servlet implementation class MatiereEnsignantGroupServlet

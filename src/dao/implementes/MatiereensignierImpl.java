@@ -19,7 +19,6 @@ public class MatiereensignierImpl implements MatiereensignierInterface {
 
 	public MatiereensignierImpl() {
 		super();
-		// emfactory = Persistence.createEntityManagerFactory("Gestion");
 	}
 
 	@Override

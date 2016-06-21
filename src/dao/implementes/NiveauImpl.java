@@ -7,10 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.sun.xml.internal.ws.encoding.soap.SOAP12Constants;
-
 import dao.interfaces.NiveauInterface;
-import model.Groupe;
 import model.Niveau;
 
 public class NiveauImpl implements NiveauInterface {
@@ -18,8 +15,6 @@ public class NiveauImpl implements NiveauInterface {
 
 	public NiveauImpl() {
 		super();
-		// emfactory = Persistence.createEntityManagerFactory("Gestion");
-
 	}
 
 	@Override

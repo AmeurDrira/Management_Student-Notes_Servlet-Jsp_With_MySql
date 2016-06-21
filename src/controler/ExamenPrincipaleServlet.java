@@ -51,22 +51,17 @@ public class ExamenPrincipaleServlet extends HttpServlet {
 		MatiereensignierImpl matiereensignierImpl = new MatiereensignierImpl();
 		GroupeImpl groupeImpl = new GroupeImpl();
 		MatiereImpl matiereImpl = new MatiereImpl();
-		EtudiantImpl etudiantImpl = new EtudiantImpl();
 		List<Matiereensignier> list;
 		List<Note> listeNote;
-		List<Etudiant> listetudiant;
 		List<Matiere> listeMatiere;
 		List<Groupe> listeGroupe;
 		Ensignant e;
-		
+
 		HttpSession session;
 		session = request.getSession();
-		listeGroupe=groupeImpl.getAllGroupe();
-		listeMatiere=matiereImpl.getAllMatiere();
-		
-		
-		
-		
+		listeGroupe = groupeImpl.getAllGroupe();
+		listeMatiere = matiereImpl.getAllMatiere();
+
 		e = (Ensignant) session.getAttribute("ensignant");
 		list = matiereensignierImpl.getAllMatiereensignierParEnsignant(e);
 		request.setAttribute("ensignant", e);
@@ -74,15 +69,14 @@ public class ExamenPrincipaleServlet extends HttpServlet {
 		request.setAttribute("listeGroupe", listeGroupe);
 		request.setAttribute("listeMatiere", listeMatiere);
 
-
 		String idgroup = request.getParameter("idgroupe");
 		String idmatiere = request.getParameter("idmatiere");
 
 		if (!(null == idgroup) && !(null == idmatiere)) {
 			Matiere matiere = matiereImpl.findByIdMatiere(Integer.parseInt(idmatiere));
 			Groupe groupe = groupeImpl.findByIdGroupe(Integer.parseInt(idgroup));
-			NoteImpl noteImpl=new NoteImpl();
-			listeNote=noteImpl.getAllNoteByGroupMatiere(groupe,matiere);
+			NoteImpl noteImpl = new NoteImpl();
+			listeNote = noteImpl.getAllNoteByGroupMatiere(groupe, matiere);
 			request.setAttribute("listeNote", listeNote);
 			request.setAttribute("matiere", matiere);
 			request.setAttribute("groupe", groupe);
@@ -105,7 +99,6 @@ public class ExamenPrincipaleServlet extends HttpServlet {
 		NoteImpl noteImpl = new NoteImpl();
 		SessionImpl sessionImpl = new SessionImpl();
 
-		List<Etudiant> listetudiant;
 		List<Note> listeNote;
 		Ensignant e;
 		HttpSession session = request.getSession();
@@ -114,8 +107,6 @@ public class ExamenPrincipaleServlet extends HttpServlet {
 
 		int idmatiere = Integer.parseInt(request.getParameter("idmatiere"));
 		int idgroupe = Integer.parseInt(request.getParameter("idgroupe"));
-
-		listetudiant = etudiantImpl.findEtudiantbyGroupe(idgroupe);
 
 		e = (Ensignant) session.getAttribute("ensignant");
 

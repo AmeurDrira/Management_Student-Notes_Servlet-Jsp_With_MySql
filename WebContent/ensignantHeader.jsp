@@ -144,7 +144,7 @@
 					<li class="treeview"><a href="ExamenPrincipaleServlet"> <i
 							class="fa fa-edit"></i> <span>Gestion Note Principale</span>
 					</a></li>
-					<li class="treeview"><a href="#"> <i
+					<li class="treeview"><a href="ExamenControleServlet"> <i
 							class="fa fa-edit"></i> <span>Gestion Note Controle</span>
 					</a></li>
 					
