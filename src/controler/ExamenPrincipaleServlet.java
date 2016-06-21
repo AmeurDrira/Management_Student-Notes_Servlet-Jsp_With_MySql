@@ -64,9 +64,13 @@ public class ExamenPrincipaleServlet extends HttpServlet {
 		listeGroupe=groupeImpl.getAllGroupe();
 		listeMatiere=matiereImpl.getAllMatiere();
 		
+		
+		
+		
 		e = (Ensignant) session.getAttribute("ensignant");
 		list = matiereensignierImpl.getAllMatiereensignierParEnsignant(e);
 		request.setAttribute("ensignant", e);
+		request.setAttribute("list", list);
 		request.setAttribute("listeGroupe", listeGroupe);
 		request.setAttribute("listeMatiere", listeMatiere);
 

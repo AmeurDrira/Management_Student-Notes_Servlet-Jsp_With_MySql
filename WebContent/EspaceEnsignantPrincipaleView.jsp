@@ -17,9 +17,9 @@
                   <label for="inputEmail3" class="col-sm-2 control-label">Groupe</label>
                   <div class="col-sm-6">
                   <select class="form-control" name="idgroupe">
-                 		 <c:forEach items="${requestScope.listeGroupe}" var="listeGroupe">          
+                 		 <c:forEach items="${requestScope.list}" var="list">          
                   						
-						<option value='<c:out value="${listeGroupe.id}"></c:out>' ><c:out value="${listeGroupe.libelle}"></c:out></option>	
+						<option value='<c:out value="${list.groupe.id}"></c:out>' ><c:out value="${list.groupe.libelle}"></c:out></option>	
 					</c:forEach>									
                    </select>
                   
@@ -30,9 +30,9 @@
                   <label for="inputEmail3" class="col-sm-2 control-label">Matiere</label>
                   <div class="col-sm-6">
                   <select class="form-control" name="idmatiere">
-                 		 <c:forEach items="${requestScope.listeMatiere}" var="listeMatiere">          
+                 		 <c:forEach items="${requestScope.list}" var="list">          
                   						
-						<option value='<c:out value="${listeMatiere.id}"></c:out>' ><c:out value="${listeMatiere.libelle}"></c:out></option>	
+						<option value='<c:out value="${list.matiere.id}"></c:out>' ><c:out value="${list.matiere.libelle}"></c:out></option>	
 					</c:forEach>									
                    </select>
                   
